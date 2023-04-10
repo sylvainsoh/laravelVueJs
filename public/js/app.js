@@ -24920,7 +24920,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       is_favourite: ''
     });
     var _useCustomers = (0,_services_cutomerservices_js__WEBPACK_IMPORTED_MODULE_1__["default"])(),
-      createCustomer = _useCustomers.createCustomer;
+      createCustomer = _useCustomers.createCustomer,
+      errors = _useCustomers.errors;
     var storeCustomer = /*#__PURE__*/function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
         return _regeneratorRuntime().wrap(function _callee$(_context) {
@@ -24929,11 +24930,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               _context.next = 2;
               return createCustomer(_objectSpread({}, form));
             case 2:
-              _context.next = 4;
+              if (errors.value) {
+                _context.next = 5;
+                break;
+              }
+              _context.next = 5;
               return _router__WEBPACK_IMPORTED_MODULE_2__["default"].push({
                 name: 'customer.index'
               });
-            case 4:
+            case 5:
             case "end":
               return _context.stop();
           }
@@ -24945,6 +24950,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }();
     return {
       form: form,
+      errors: errors,
       storeCustomer: storeCustomer
     };
   }
@@ -24994,48 +25000,51 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
-var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+var _hoisted_1 = {
+  key: 0
+};
+var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
   "for": "id",
   "class": "block"
 }, "Non du client", -1 /* HOISTED */);
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
   "for": "tel",
   "class": "block"
 }, "Téléphone", -1 /* HOISTED */);
-var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
   "for": "is_favourite",
   "class": "block"
 }, "Favoris ? ", -1 /* HOISTED */);
-var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
   type: "submit",
   "class": "bg-gray-800 px-2 py-1 text-white rounded"
 }, " Enrégister un client ", -1 /* HOISTED */);
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("form", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [$setup.errors !== '' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.errors), 1 /* TEXT */)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
     "class": "space-y-6",
     onSubmit: _cache[3] || (_cache[3] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
       return $setup.storeCustomer && $setup.storeCustomer.apply($setup, arguments);
     }, ["prevent"]))
-  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "text",
     id: "name",
     "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
       return $setup.form.name = $event;
     })
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.form.name]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.form.name]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "text",
     id: "tel",
     "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
       return $setup.form.tel = $event;
     })
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.form.tel]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.form.tel]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "checkbox",
     id: "is_favouritetel",
     "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
       return $setup.form.is_favourite = $event;
     })
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelCheckbox, $setup.form.is_favourite]])]), _hoisted_4], 32 /* HYDRATE_EVENTS */);
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelCheckbox, $setup.form.is_favourite]])]), _hoisted_5], 32 /* HYDRATE_EVENTS */)], 64 /* STABLE_FRAGMENT */);
 }
 
 /***/ }),
@@ -25239,6 +25248,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 function useCustomers() {
   var customers = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)([]);
+  var errors = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)('');
   var getCustomers = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
       var response;
@@ -25262,19 +25272,28 @@ function useCustomers() {
   }();
   var createCustomer = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(data) {
-      var response;
+      var createCustomersErrors, key;
       return _regeneratorRuntime().wrap(function _callee2$(_context2) {
         while (1) switch (_context2.prev = _context2.next) {
           case 0:
-            _context2.next = 2;
+            _context2.prev = 0;
+            _context2.next = 3;
             return axios__WEBPACK_IMPORTED_MODULE_1___default().post('/api/customers', data);
-          case 2:
-            response = _context2.sent;
           case 3:
+            _context2.next = 9;
+            break;
+          case 5:
+            _context2.prev = 5;
+            _context2.t0 = _context2["catch"](0);
+            createCustomersErrors = _context2.t0.response.data.errors;
+            for (key in createCustomersErrors) {
+              errors.value += createCustomersErrors[key][0] + ' ';
+            }
+          case 9:
           case "end":
             return _context2.stop();
         }
-      }, _callee2);
+      }, _callee2, null, [[0, 5]]);
     }));
     return function createCustomer(_x) {
       return _ref2.apply(this, arguments);
@@ -25283,7 +25302,8 @@ function useCustomers() {
   return {
     customers: customers,
     getCustomers: getCustomers,
-    createCustomer: createCustomer
+    createCustomer: createCustomer,
+    errors: errors
   };
 }
 

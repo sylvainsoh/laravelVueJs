@@ -1,4 +1,7 @@
 <template>
+    <div v-if="errors!=='' ">
+        {{errors}}
+    </div>
     <form class="space-y-6" @submit.prevent="storeCustomer">
         <div>
             <label for="id" class="block">Non du client</label>
@@ -34,14 +37,17 @@ export default {
                 is_favourite : '',
             });
 
-        const {createCustomer} = useCustomers();
+        const {createCustomer, errors} = useCustomers();
         const storeCustomer = async () => {
             await createCustomer({...form});
-            await router.push({name: 'customer.index'})
+            if (!errors.value){
+                await router.push({name: 'customer.index'})
+            }
         };
 
         return {
             form,
+            errors,
             storeCustomer
         }
     }

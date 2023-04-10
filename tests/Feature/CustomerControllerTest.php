@@ -16,6 +16,8 @@ class CustomerControllerTest extends TestCase
      */
     public function itListCustomers()
     {
+        $this->seed();
+
         $response = $this->get('/api/customers');
 
         $response->assertOk();
@@ -32,7 +34,7 @@ class CustomerControllerTest extends TestCase
             [
                 'name' => 'Premier client',
                 'tel' => '06xxxxxxxx',
-                'is_favorite' => true
+                'is_favourite' => true
             ]
         );
 
@@ -43,4 +45,19 @@ class CustomerControllerTest extends TestCase
         $this->assertEquals('Premier client',$customer->name);
         $response->assertOk();
     }
+    /**
+     * @test
+     */
+    public function itValidatesFields(){
+        $response = $this->post('/api/customers',
+            [
+                'name' => '',
+                'tel' => '',
+                'is_favourite' => ''
+            ]
+        );
+
+        $response->assertSessionHasErrors(['name','tel','is_favourite']);
+    }
+
 }
