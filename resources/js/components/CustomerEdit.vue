@@ -2,26 +2,24 @@
     <div v-if="errors!=='' ">
         {{errors}}
     </div>
-    <form class="space-y-6" @submit.prevent="storeCustomer">
+    <form class="space-y-6" @submit.prevent="saveCustomer">
         <div>
             <label for="id" class="block">Non du client</label>
-            <input type="text" id="name" v-model="form.name">
+            <input type="text" id="name" v-model="customer.name">
         </div>
         <div>
             <label for="tel"  class="block">Téléphone</label>
-            <input type="text" id="tel"  v-model="form.tel">
+            <input type="text" id="tel"  v-model="customer.tel">
         </div>
         <div>
             <label for="is_favourite"  class="block">Favoris ? </label>
-            <input type="checkbox" id="is_favouritetel"  v-model="form.is_favourite">
+            <input type="checkbox" id="is_favouritetel"  v-model="customer.is_favourite">
         </div>
-
         <router-link :to="{name : 'customer.index'}" class="bg-gray-800 px-2 py-1 text-white rounded">
             Annuler
         </router-link>  &nbsp;
-
         <button type="submit" class="bg-gray-800 px-2 py-1 text-white rounded">
-            Enrégister un client
+            Mettre à jour
         </button>
     </form>
 </template>
@@ -29,31 +27,35 @@
 
 <script>
 
-import {reactive} from "vue";
+import {onMounted } from "vue";
 import useCustomers from "../services/cutomerservices.js";
 import router from "../router";
 
 export default {
-    setup(){
-        const form = reactive(
-            {
-                name : '',
-                tel : '',
-                is_favourite : '',
-            });
+    props : {
+        id : {
+            required : true,
+            type : String
+        }
+    },
 
-        const {createCustomer, errors} = useCustomers();
-        const storeCustomer = async () => {
-            await createCustomer({...form});
-            if (!errors.value){
+     setup(props) {
+        const {getCustomer, customer, updateCustomer, errors} = useCustomers();
+
+        onMounted(getCustomer(props.id));
+
+        const saveCustomer = async() => {
+            await updateCustomer(props.id);
+
+            if (!errors.value) {
                 await router.push({name: 'customer.index'})
             }
         };
 
         return {
-            form,
-            errors,
-            storeCustomer
+            saveCustomer,
+            customer,
+            errors
         }
     }
 }

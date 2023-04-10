@@ -41,9 +41,10 @@ class CustomerControllerTest extends TestCase
         $customers=Customer::all();
         $customer=Customer::first();
 
+        $response->assertStatus(201);
+
         $this->assertEquals(1,$customers->count());
         $this->assertEquals('Premier client',$customer->name);
-        $response->assertOk();
     }
     /**
      * @test
@@ -56,8 +57,37 @@ class CustomerControllerTest extends TestCase
                 'is_favourite' => ''
             ]
         );
+        $response->assertSessionHasErrors(['name','tel']);
+    }
+    /**
+     * @test
+     */
+    public  function itUpdatesCustomer(){
+        $this->seed();
 
-        $response->assertSessionHasErrors(['name','tel','is_favourite']);
+        $customer=Customer::first();
+
+        $response = $this->put('api/customers/'.$customer->id, [
+            'name' => 'Nom édité',
+            'tel' => '07xxxxxxxxxx',
+            'is_favourite' => true,
+        ]);
+        $updatedCustomer=Customer::find($customer->id);
+
+        $response->assertOk();
+
+        $this->assertEquals('Nom édité', $updatedCustomer->name);
+    }
+    /**
+     * @test
+     */
+    public function itDeletesACustomer(){
+        $this->seed();
+        $customer=Customer::first();
+        $response=$this->delete('/api/customers/'.$customer->id);
+
+        $response->assertNoContent();
+        $this->assertEquals(14, Customer::count());
     }
 
 }
